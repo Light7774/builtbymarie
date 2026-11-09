@@ -1,5 +1,4 @@
-# test line
-second# builtbymarie.com: live automation playground
+# builtbymarie.com: live automation playground
 
 My portfolio site for automation services. Visitors don't just read about what I build.
 They **try a real automation on their own business**, right on the page, and get the result in seconds.

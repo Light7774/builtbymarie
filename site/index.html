@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Marie Angelie Gerios builds retention automation for membership and community businesses. n8n workflows, self-hosted, documented for handover.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Built by Marie">
+<meta property="og:description" content="Retention automation for membership and community businesses.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://builtbymarie.com">
+<style>
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+<title>Built by Marie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+  :root {
+    color-scheme: light;
+    --paper:   #f3f5f1;
+    --surface: #ffffff;
+    --ink:     #151f1a;
+    --muted:   #5a675f;
+    --line:    #d7ded6;
+    --accent:  #1f6b4a;
+    --accent-soft: #e4efe8;
+    --shadow: 0 1px 2px rgba(21,31,26,.05), 0 8px 24px -16px rgba(21,31,26,.25);
+
+    --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper:   #0e1411;
+      --surface: #151d18;
+      --ink:     #e7ede8;
+      --muted:   #96a39b;
+      --line:    #263029;
+      --accent:  #63c691;
+      --accent-soft: #16251d;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper:   #0e1411;
+    --surface: #151d18;
+    --ink:     #e7ede8;
+    --muted:   #96a39b;
+    --line:    #263029;
+    --accent:  #63c691;
+    --accent-soft: #16251d;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 0;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-block: 26px 0;
+  }
+  .wordmark {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .wordmark span { color: var(--accent); }
+  .whereabouts {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- hero ---------- */
+
+  .hero { padding-block: 56px 20px; }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 6.4vw, 3.4rem);
+    line-height: 1.04;
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+    margin: 0 0 22px;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .standfirst {
+    font-size: clamp(1.05rem, 2.6vw, 1.22rem);
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 34em;
+    margin: 0;
+  }
+
+  .rule {
+    height: 1px;
+    background: var(--line);
+    border: 0;
+    margin: 0;
+  }
+
+  /* ---------- section frame ---------- */
+
+  section { padding-block: 46px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex: none;
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 3.6vw, 1.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0 0 10px;
+  }
+
+  .lede {
+    color: var(--muted);
+    max-width: 38em;
+    margin: 0 0 30px;
+  }
+
+  h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.06rem;
+    letter-spacing: -0.012em;
+    line-height: 1.3;
+    margin: 0 0 7px;
+  }
+
+  p { margin: 0 0 14px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ---------- offers ---------- */
+
+  .offers {
+    display: grid;
+    gap: 14px;
+  }
+  .offer {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px 22px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 16px;
+    align-items: start;
+  }
+  .offer .n {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--accent);
+    padding-top: 5px;
+    grid-row: span 2;
+  }
+  .offer p {
+    color: var(--muted);
+    font-size: 16px;
+    margin: 0;
+  }
+
+  /* ---------- proof ---------- */
+
+  .work {
+    display: grid;
+    gap: 0;
+  }
+  .item {
+    padding-block: 22px;
+    border-top: 1px solid var(--line);
+  }
+  .item:first-child { border-top: 0; padding-top: 0; }
+
+  .item-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 12px;
+    margin-bottom: 8px;
+  }
+  .item-head h3 { margin: 0; }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 2px;
+    padding: 3px 7px;
+    white-space: nowrap;
+  }
+
+  .item p { color: var(--muted); font-size: 16px; }
+
+  .note {
+    margin: 22px 0 0;
+    padding-top: 18px;
+    border-top: 1px dashed var(--line);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 44em;
+  }
+
+  /* ---------- node chain ---------- */
+
+  .chain-frame {
+    margin-top: 16px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--surface);
+    padding: 16px 18px 18px;
+  }
+  .chain-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .node {
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 5px 9px;
+    background: var(--paper);
+    white-space: nowrap;
+  }
+  .node.lit {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .arrow { color: var(--muted); flex: none; }
+
+  /* ---------- method ---------- */
+
+  .steps { display: grid; gap: 22px; }
+  .step {
+    display: grid;
+    grid-template-columns: 3.1rem 1fr;
+    gap: 0 14px;
+    align-items: start;
+  }
+  .step .num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    padding-top: 4px;
+    grid-row: span 2;
+    letter-spacing: 0.06em;
+  }
+  .step p { color: var(--muted); font-size: 16px; margin: 0; }
+
+  /* ---------- stack ---------- */
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .stack li {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 5px 9px;
+    background: var(--surface);
+  }
+
+  /* ---------- engage ---------- */
+
+  .engage {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 26px 24px;
+  }
+  .facts {
+    display: grid;
+    gap: 14px;
+    margin: 0 0 20px;
+    padding: 0;
+  }
+  .fact { display: grid; gap: 2px; }
+  .fact dt {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .fact dd { margin: 0; font-size: 16px; }
+
+  .reach {
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    font-size: 16px;
+    color: var(--muted);
+  }
+  .reach strong {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    display: inline-block;
+    margin-top: 4px;
+    user-select: all;
+  }
+
+  /* ---------- footer ---------- */
+
+  footer {
+    padding-block: 30px 42px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    justify-content: space-between;
+  }
+
+  @media (min-width: 620px) {
+    .offers { gap: 16px; }
+    .facts { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .node.lit { transition: none; }
+  }
+
+  /* ---------- demo ---------- */
+  .demo {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 24px 22px;
+    box-shadow: var(--shadow);
+  }
+  .demo form { display: grid; gap: 14px; }
+  .field { display: grid; gap: 5px; }
+  .field label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .field input, .field textarea, .field select {
+    font: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 10px 12px;
+    width: 100%;
+  }
+  .field textarea { min-height: 76px; resize: vertical; }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
+  }
+  .row2 { display: grid; gap: 14px; }
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--muted); }
+  .consent input { margin-top: 5px; accent-color: var(--accent); }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .btn {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    color: #fff;
+    background: var(--accent);
+    border: 0;
+    border-radius: 3px;
+    padding: 12px 18px;
+    cursor: pointer;
+    justify-self: start;
+    text-decoration: none;
+    display: inline-block;
+  }
+  :root[data-theme="dark"] .btn { color: #0e1411; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn { color: #0e1411; } }
+  .btn[disabled] { opacity: .6; cursor: wait; }
+  .status { font-family: var(--mono); font-size: 12.5px; color: var(--muted); min-height: 1.2em; }
+  .status.err { color: #b3261e; }
+  .results { display: grid; gap: 12px; margin-top: 18px; }
+  .mail {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 3px;
+    background: var(--paper);
+    padding: 14px 16px;
+  }
+  .mail .when { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  .mail .subj { font-family: var(--display); font-weight: 600; margin: 4px 0 8px; }
+  .mail .body { white-space: pre-wrap; font-size: 15.5px; color: var(--ink); margin: 0; }
+  .fine { font-family: var(--mono); font-size: 11.5px; line-height: 1.7; color: var(--muted); margin-top: 14px; }
+
+  /* ---------- tiers ---------- */
+  .tiers { display: grid; gap: 12px; margin-top: 16px; }
+  .tier {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 18px 20px;
+  }
+  .tier.mid { border-color: var(--accent); box-shadow: var(--shadow); }
+  .tier .price { font-family: var(--display); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.02em; }
+  .tier .tname { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  .tier p { color: var(--muted); font-size: 15.5px; margin: 6px 0 0; }
+  .also { margin-top: 26px; }
+
+  /* ---------- builds list ---------- */
+  .builds { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; }
+  .builds li {
+    display: grid; grid-template-columns: auto 1fr; gap: 2px 12px;
+    border-top: 1px solid var(--line); padding-top: 10px;
+  }
+  .builds li:first-child { border-top: 0; padding-top: 0; }
+  .builds .k { font-family: var(--mono); font-size: 11.5px; color: var(--accent); padding-top: 3px; }
+  .builds b { font-family: var(--display); font-weight: 600; }
+  .builds span.d { grid-column: 2; color: var(--muted); font-size: 15.5px; }
+
+  @media (min-width: 620px) {
+    .row2 { grid-template-columns: 1fr 1fr; }
+    .tiers { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="wordmark">built by <span>marie</span></div>
+    <div class="whereabouts">Cavite, Philippines &middot; UTC+8</div>
+  </header>
+
+  <div class="hero">
+    <h1>6 AI automations built in n8n. Now I build the ones that keep members from <em>drifting away</em>.</h1>
+    <p class="standfirst">
+      Retention automation for membership and community businesses: win back lapsed
+      members, turn scattered know-how into SOPs, and hear what people say before they
+      cancel. Self-hosted on infrastructure I run myself, handed over with a runbook.
+    </p>
+    <p style="margin-top:22px"><a class="btn" href="#try">Try a live automation &darr;</a></p>
+  </div>
+
+  <hr class="rule">
+
+  <section id="try">
+    <p class="eyebrow">Try it live</p>
+    <h2>Get a 3-email win-back sequence for your members</h2>
+    <p class="lede">
+      Tell me about your membership and why people leave. My n8n workflow writes a
+      win-back sequence for you in about 20 seconds. This is the same kind of
+      automation I build for clients, running on my own server.
+    </p>
+
+    <div class="demo">
+      <form id="winback" novalidate>
+        <div class="row2">
+          <div class="field">
+            <label for="f-name">Your first name</label>
+            <input id="f-name" name="name" maxlength="40" autocomplete="given-name" required>
+          </div>
+          <div class="field">
+            <label for="f-email">Email (I'll send you a copy)</label>
+            <input id="f-email" name="email" type="email" maxlength="120" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-biz">What is your membership or community?</label>
+          <input id="f-biz" name="business" maxlength="140" placeholder="e.g. A paid yoga community with live classes and a replay library" required>
+        </div>
+        <div class="field">
+          <label for="f-why">Why do members usually leave?</label>
+          <textarea id="f-why" name="reason" maxlength="400" placeholder="e.g. They join in January, miss a few classes, feel behind and quietly cancel" required></textarea>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="f-offer">Anything you can offer to bring them back? (optional)</label>
+            <input id="f-offer" name="offer" maxlength="120" placeholder="e.g. One free month, a 1:1 restart call">
+          </div>
+          <div class="field">
+            <label for="f-tone">Tone</label>
+            <select id="f-tone" name="tone">
+              <option value="warm">Warm and personal</option>
+              <option value="direct">Short and direct</option>
+              <option value="playful">Light and playful</option>
+            </select>
+          </div>
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label for="f-web">Leave this empty</label>
+          <input id="f-web" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <label class="consent">
+          <input type="checkbox" id="f-ok" name="consent" required>
+          <span>Email me a copy of my sequence. Marie may follow up once about it. No newsletter, no list-selling.</span>
+        </label>
+        <button class="btn" type="submit" id="f-go">Write my win-back emails</button>
+        <div class="status" id="f-status" role="status" aria-live="polite"></div>
+      </form>
+
+      <div class="results" id="f-results" hidden></div>
+
+      <p class="fine">
+        Under the hood: Webhook &rarr; validate &amp; rate-limit &rarr; AI (Groq) &rarr;
+        reply to this page &rarr; log to Google Sheets &rarr; email you a copy &rarr; notify me.
+        Your details are used only for this request.
+      </p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <p class="eyebrow">Lead offer</p>
+    <h2>Lapsed-member win-back automation</h2>
+    <p class="lede">
+      The cheapest revenue in a membership business usually sits in the list of people
+      who already paid once. Fixed scope, fixed price, handed over with a runbook and a
+      Loom walkthrough so your team can run it without me.
+    </p>
+
+    <div class="tiers">
+      <article class="tier">
+        <div class="tname">Starter</div>
+        <div class="price">$295</div>
+        <p>One automated win-back email sequence for cancelled members, set up inside the email tool you already use.</p>
+      </article>
+      <article class="tier mid">
+        <div class="tname">Standard &middot; most chosen</div>
+        <div class="price">$575</div>
+        <p>Find lapsed and cancelled members, a 3-step win-back sequence across email plus one more channel, a simple results sheet, runbook and Loom.</p>
+      </article>
+      <article class="tier">
+        <div class="tname">Premium</div>
+        <div class="price">$1,150</div>
+        <p>Everything in Standard, plus AI-personalised messages, failed-payment recovery and a monthly win-back report.</p>
+      </article>
+    </div>
+
+    <div class="offers also">
+      <article class="offer">
+        <div class="n">02</div>
+        <h3>SOP &amp; training-doc generator</h3>
+        <p>
+          Recorded calls, chat threads and scattered notes become written procedures
+          your team can actually follow. New staff stop asking the same five questions.
+        </p>
+      </article>
+      <article class="offer">
+        <div class="n">03</div>
+        <h3>Customer-feedback mining</h3>
+        <p>
+          Surveys, reviews, tickets and comments sorted into themes, ranked by how
+          often each one shows up just before somebody cancels.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <p class="eyebrow">Built and running</p>
+    <h2>What I have built</h2>
+    <p class="lede">
+      Every build below runs on my own n8n server. Ask me on a call and I will walk you
+      through any of them live.
+    </p>
+
+    <div class="work">
+      <article class="item">
+        <div class="item-head">
+          <h3>Facebook Messenger AI agent</h3>
+          <span class="tag">Live</span>
+        </div>
+        <p>
+          Answers questions on a Facebook Page in Taglish, grounded in a knowledge
+          document so it declines to invent prices or dates, sends payment links, and
+          logs every conversation to a sheet for follow-up. Built node by node: the Meta
+          webhook handshake, a filter that drops everything but real text, and replies
+          posted back through the Send API.
+        </p>
+        <div class="chain-frame">
+          <div class="chain-label">Production workflow</div>
+          <div class="chain">
+            <span class="node">Webhook</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+            <span class="node">Filter</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+            <span class="node">Knowledge base</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+            <span class="node lit">AI Agent</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+            <span class="node">Payment link</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+            <span class="node">Send reply</span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+            <span class="node">Sheets</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <ul class="builds">
+      <li><span class="k">02</span><b>AI appointment setter</b><span class="d">Qualifies an enquiry, offers open slots and books it onto the calendar.</span></li>
+      <li><span class="k">03</span><b>AI jobs scraper + resume optimizer</b><span class="d">Pulls matching job posts and tailors a resume to each one.</span></li>
+      <li><span class="k">04</span><b>HR job posting + AI candidate evaluation</b><span class="d">Publishes a role, collects applicants and scores them against the brief.</span></li>
+      <li><span class="k">05</span><b>Auto YouTube Shorts / Facebook Reels creator</b><span class="d">Turns a topic into a short vertical video, ready to post.</span></li>
+      <li><span class="k">06</span><b>RAG knowledge agent</b><span class="d">Answers questions from your own documents instead of guessing.</span></li>
+      <li><span class="k">07</span><b>Win-back sequence generator</b><span class="d">The live demo at the top of this page.</span></li>
+    </ul>
+
+    <p class="note">
+      All of it runs on a VPS I administer: n8n under Docker Compose, Traefik for
+      routing and automatic TLS on my own domain. Client demos run on public webhooks
+      that do not vanish when a trial expires.
+    </p>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <p class="eyebrow">How I work</p>
+    <h2>Find the leak first, build second</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <h3>Map where people fall out</h3>
+        <p>
+          We trace the actual path a member takes and find the point where they go
+          quiet. Often the fix is smaller than the one you were about to pay for.
+        </p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h3>Build the smallest thing that closes it</h3>
+        <p>
+          One workflow, scoped to one leak, shipped in weeks rather than quarters.
+          You see it running on real data before we discuss anything else.
+        </p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h3>Hand it over documented</h3>
+        <p>
+          Every build comes with a written runbook and a Loom: what each step does,
+          what breaks it, and how to fix it without me. Seven years teaching IT means I
+          write these for the person who has to read them at 2am.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <p class="eyebrow">Tools</p>
+    <h2>What I actually work in</h2>
+    <ul class="stack">
+      <li>n8n</li>
+      <li>Zapier</li>
+      <li>Make.com</li>
+      <li>Docker</li>
+      <li>Traefik</li>
+      <li>Groq</li>
+      <li>OpenAI</li>
+      <li>Meta Graph API</li>
+      <li>Google Workspace APIs</li>
+      <li>Google Apps Script</li>
+      <li>PayMongo</li>
+      <li>Stripe</li>
+      <li>Mailchimp</li>
+      <li>Circle</li>
+      <li>WordPress</li>
+      <li>Airtable</li>
+      <li>Microsoft 365</li>
+    </ul>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <p class="eyebrow">Working together</p>
+    <h2>Send me your workflow</h2>
+
+    <div class="engage">
+      <dl class="facts">
+        <div class="fact">
+          <dt>Engagement</dt>
+          <dd>Fixed-scope projects, async</dd>
+        </div>
+        <div class="fact">
+          <dt>Pricing</dt>
+          <dd>Fixed price, then optional retainer</dd>
+        </div>
+        <div class="fact">
+          <dt>Time zone</dt>
+          <dd>UTC+8, overlaps EST evenings</dd>
+        </div>
+      </dl>
+
+      <p style="color: var(--muted); font-size: 16px;">
+        Describe the manual task or the leak you want fixed. I will reply with a short
+        Loom showing how I would automate it, and a fixed quote. I take one build at a
+        time, so each one is properly scoped, tested on real data and documented.
+      </p>
+
+      <p style="margin-top:18px">
+        <a class="btn" href="mailto:angelie@builtbymarie.com?subject=My%20workflow%20(from%20builtbymarie.com)&body=What%20I%20do%20by%20hand%20today%3A%0A%0ATools%20I%20use%3A%0A%0AWhat%20I%20want%20to%20happen%20automatically%3A%0A">Send me your workflow</a>
+      </p>
+
+      <div class="reach">
+        Or email me directly<br>
+        <strong>angelie@builtbymarie.com</strong>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Marie Angelie Gerios</span>
+    <span>builtbymarie.com</span>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  // Production webhook on Marie's n8n. Change here if the path changes.
+  var WEBHOOK = 'https://n8n.builtbymarie.com/webhook/winback-demo';
+
+  var form = document.getElementById('winback');
+  var go = document.getElementById('f-go');
+  var statusEl = document.getElementById('f-status');
+  var out = document.getElementById('f-results');
+
+  function setStatus(msg, isErr) {
+    statusEl.textContent = msg || '';
+    statusEl.className = 'status' + (isErr ? ' err' : '');
+  }
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = String(text);
+    return n;
+  }
+
+  function render(emails) {
+    out.innerHTML = '';
+    emails.slice(0, 3).forEach(function (m, i) {
+      var box = el('article', 'mail');
+      box.appendChild(el('div', 'when', m.send_on || ('Email ' + (i + 1))));
+      box.appendChild(el('div', 'subj', m.subject || ''));
+      box.appendChild(el('p', 'body', m.body || ''));
+      out.appendChild(box);
+    });
+    out.hidden = false;
+  }
+
+  function recentlySent() {
+    try {
+      var t = Number(localStorage.getItem('bbm_winback_t') || 0);
+      return Date.now() - t < 2 * 60 * 1000;
+    } catch (e) { return false; }
+  }
+  function markSent() {
+    try { localStorage.setItem('bbm_winback_t', String(Date.now())); } catch (e) {}
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var d = {
+      name: form.elements.name.value.trim(),
+      email: form.elements.email.value.trim(),
+      business: form.elements.business.value.trim(),
+      reason: form.elements.reason.value.trim(),
+      offer: form.elements.offer.value.trim(),
+      tone: form.elements.tone.value,
+      website: form.elements.website.value,
+      consent: form.elements.consent.checked
+    };
+    if (!d.name || !d.email || !d.business || !d.reason) {
+      setStatus('Please fill in your name, email, membership and why members leave.', true); return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) { setStatus('That email does not look right.', true); return; }
+    if (!d.consent) { setStatus('Please tick the box so I can send your copy.', true); return; }
+    if (recentlySent()) { setStatus('You just ran it. Give it a couple of minutes before trying again.', true); return; }
+
+    go.disabled = true;
+    out.hidden = true;
+    setStatus('Writing your sequence. This takes about 20 seconds…');
+
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 60000);
+
+    fetch(WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(d),
+      signal: ctrl ? ctrl.signal : undefined
+    })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (!res.ok || !res.j || res.j.ok === false || !Array.isArray(res.j.emails)) {
+          throw new Error((res.j && res.j.message) || 'bad response');
+        }
+        markSent();
+        render(res.j.emails);
+        setStatus('Done. A copy is on its way to ' + d.email + '.');
+      })
+      .catch(function (err) {
+        var msg = (err && err.message && err.message !== 'bad response' && err.name !== 'AbortError' && err.name !== 'TypeError')
+          ? err.message
+          : 'The demo is busy right now. Email angelie@builtbymarie.com and I will send your sequence by hand.';
+        setStatus(msg, true);
+      })
+      .finally(function () { clearTimeout(timer); go.disabled = false; });
+  });
+})();
+</script>
+
+</body>
+</html>
